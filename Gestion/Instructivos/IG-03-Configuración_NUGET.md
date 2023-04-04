@@ -2,7 +2,7 @@
 title: IG-03 Configuración_NUGET
 description: Instructivo gestión de la configuración de NuGets
 published: true
-date: 2023-04-04T21:42:45.074Z
+date: 2023-04-04T21:44:17.555Z
 tags: nuget, gestion de la configuracion, instructivos, ig-03, dependencias, librerias, paquetes
 editor: markdown
 dateCreated: 2023-04-04T19:44:54.567Z
@@ -81,7 +81,7 @@ El proyecto **GENNET**, es identificado como dependencia base para cualquier pro
   
 mdi mdi-set-none
 
-# 6.3. Tipos de paquetes NUGET.
+## 6.3. Tipos de paquetes NUGET.
 
 Teniendo en cuenta la identificación de las dependencias que son controladas con paquetes NUGET, se definen 2 tipos de paquetes NUGET para su generación.
 
