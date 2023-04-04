@@ -2,7 +2,7 @@
 title: IG-03 Configuración_NUGET
 description: Instructivo gestión de la configuración de NuGets
 published: true
-date: 2023-04-04T20:34:15.582Z
+date: 2023-04-04T20:43:24.977Z
 tags: nuget, gestion de la configuracion, instructivos, ig-03, dependencias, librerias, paquetes
 editor: markdown
 dateCreated: 2023-04-04T19:44:54.567Z
@@ -74,10 +74,23 @@ Los proyectos desarrollados por ACTSIS que son identificados como dependencias, 
 
 Todos los proyectos identificados como **Core** de un sistema, teniendo en cuenta la definición Core de un proyecto .NET del documento **FD-14** Arquitectura e Interfaces_General .NET.
 
-### GENNET <i class="mdi mdi-alpha-g-box">
-
+### GENNET <i class="mdi mdi-alpha-g-box"></i>
 El proyecto **GENNET**, es identificado como dependencia base para cualquier proyecto ASP.NET Web Forms de ACTSIS, según el documento **FD-14** Arquitectura e Interfaces_General .NET.
 
 ### Otros <i class="mdi mdi-set-none"></i>
   
 mdi mdi-set-none
+
+# 6.3. Tipos de paquetes NUGET.
+
+Teniendo en cuenta la identificación de las dependencias que son controladas con paquetes NUGET, se definen 2 tipos de paquetes NUGET para su generación.
+
+## tipos_NuGets {.tabset}
+
+### Paquetes NUGET de librería dll
+
+Corresponden a los paquetes que gestionan las dependencias de proyectos .Net que solo generan librerías dll, el destino de estas librerías en los proyectos que la usan, es la carpeta **Bin**. Teniendo en cuenta que el paquete **3rosCore** entrega todas las librerías dll de terceros que son requeridas a nivel de Core, este es tipificado como paquete de librerías dll.
+
+### Paquetes NUGET de contenido
+
+Corresponden a los paquetes que gestionan cualquier tipo de archivo para ser ubicado dentro de la estructura del proyecto .NET. Estos paquetes pueden entregar código no compilado que debe ser compilado por el proyecto que lo usa. Para este caso se encuentra el paquete NUGET del proyecto GENNET, el cual entrega todo el contenido del proyecto ASP .NET Web Forms correspondiente a las pantallas, controles de usuario, scripts y otras clases C# que debe compilar el proyecto que lo usa. Teniendo en cuenta que el paquete 3rosWeb entrega todos los archivos, contenidos, scripts, dlls, xml y cualquier otro tipo de archivo que sea requerido a nivel de proyecto ASP .NET Web Forms desarrollado por un tercero, es tipificados como proyecto de contenido.
