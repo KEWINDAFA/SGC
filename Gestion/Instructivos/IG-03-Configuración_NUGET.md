@@ -2,7 +2,7 @@
 title: IG-03 Configuración_NUGET
 description: Instructivo gestión de la configuración de NuGets
 published: true
-date: 2023-04-04T21:37:58.321Z
+date: 2023-04-04T21:38:50.360Z
 tags: nuget, gestion de la configuracion, instructivos, ig-03, dependencias, librerias, paquetes
 editor: markdown
 dateCreated: 2023-04-04T19:44:54.567Z
@@ -277,3 +277,7 @@ Como parte del mantenimiento del servidor de paquetes nuget, se definen las sigu
 Ejemplo:
 
 ![eliminar_paquetes_nuget.png](/recursos/imagenes/eliminar_paquetes_nuget.png)
+
+
+![logo-banner-principal.png](/recursos/imagenes/logos/logo-banner-principal.png)
+{.align-abstopright}
