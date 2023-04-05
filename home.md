@@ -2,7 +2,7 @@
 title: Inicio
 description: 
 published: true
-date: 2023-04-05T19:27:53.058Z
+date: 2023-04-05T19:53:08.189Z
 tags: 
 editor: markdown
 dateCreated: 2023-04-04T16:54:38.307Z
@@ -20,9 +20,15 @@ Test
 
 ---
 
-|     |     |     |
-| --- | --- | --- |
-| 1   |     |     |
-|     |     |     |
-|     |     |     |
-|     |     | 3   |
+|     |     |     |     |
+| --- | --- | --- | --- |
+|     |     |     |     |
+|     |     |     |     |
+|     |     |     |     |
+
+|     | **GESTIÓN DE DEPENDENCIAS .NET - NUGET** |     | **Código:** IG-03 | **Versión:**  01 |
+| --- | --- | --- | --- |
+| **Fecha:** 29/10/2020 | **Página:** 12 de 12 |
+| --- | --- | --- | --- |
+| **Elaboró:** Jorge Reyes Vargas |     | **Aprobó:** Iván Darío Sarmiento L. |     | **Controlado:** Si |
+| --- | --- | --- | --- |
