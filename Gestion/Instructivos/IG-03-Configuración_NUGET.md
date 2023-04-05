@@ -2,7 +2,7 @@
 title: IG-03 Configuración NUGET
 description: Instructivo gestión de la configuración de NuGets
 published: true
-date: 2023-04-04T22:15:14.822Z
+date: 2023-04-05T12:32:14.033Z
 tags: nuget, gestion de la configuracion, instructivos, ig-03, dependencias, librerias, paquetes
 editor: markdown
 dateCreated: 2023-04-04T19:44:54.567Z
@@ -10,7 +10,7 @@ dateCreated: 2023-04-04T19:44:54.567Z
 
 # Descripción General
 
-## 1. Objetivos
+## 1. OBJETIVOS
 
 Este instructivo tiene como propósito establecer la metodología para gestionar la configuración de los paquetes que son identificados como dependencias en un sistema de información .NET mediante la tecnología NUGET.
 
@@ -278,4 +278,4 @@ Ejemplo:
 
 ![eliminar_paquetes_nuget.png](/recursos/imagenes/eliminar_paquetes_nuget.png)
 
-![actsis.com](https://www.actsis.com/wp-content/uploads/2021/06/logo-banner-principal.png){.align-abstopright}
+![nuget](https://upload.wikimedia.org/wikipedia/commons/2/25/NuGet_project_logo.svg){.align-abstopright}
