@@ -2,7 +2,7 @@
 title: IG-03 Configuración NUGET
 description: Instructivo gestión de la configuración de NuGets
 published: true
-date: 2023-04-05T16:13:08.859Z
+date: 2023-04-05T16:37:18.862Z
 tags: nuget, gestion de la configuracion, instructivos, ig-03, dependencias, librerias, paquetes
 editor: markdown
 dateCreated: 2023-04-04T19:44:54.567Z
@@ -44,6 +44,7 @@ Todos los productos de trabajo deben ser puestos bajo control del Sistema de Ges
 - [Instructivo IA-04 *Realización Backups*](/)
 - [Guía GA-03 *Definiciones SGC*](/)
 - [FD-14 *Arquitectura e Interfaces_GENNET*](/)
+- [ft-03_entrevista_prueba_técnica_prueba_psicotécnica.doc](/recursos/ft-03_entrevista_prueba_técnica_prueba_psicotécnica.doc)
 {.links-list}
 
 # 6.	GESTIÓN DE PAQUETES NUGET
