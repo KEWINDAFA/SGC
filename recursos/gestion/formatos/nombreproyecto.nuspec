@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+	<metadata>
+		<id>Actsis.ECharts.Webforms</id>
+		<version>8.0.$rev$</version>
+		<title>Librería de controles ECharts</title>
+		<authors>GENERAL</authors>
+		<owners>$owner$</owners>
+		<description>Controles personalizados para gráficas Apache ECharts en Webforms.</description>
+		<releaseNotes>$changes$</releaseNotes>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<repository type="svn" url="$repositoryUrl$" branch="$repositoryBranch$" commit="$repositoryCommit$"/>
+		<projectUrl>$projectUrl$</projectUrl>
+		<tags>tag1 tag1</tags>
+		<copyright>Copyright 2023</copyright>
+		<icon>icon.png</icon>
+		<readme>README.md</readme>
+		<language>es-CO</language>
+		<license type="file">LICENSE</license>
+	</metadata>
+	<files>
+		<file src="GEN/**/*.*" target="content/"  />
+		<file src="icon.png" target="" />
+		<file src="README.md" target="" />
+		<file src="LICE*" target="" />
+	</files>
+</package>
