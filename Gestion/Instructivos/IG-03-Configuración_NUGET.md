@@ -2,7 +2,7 @@
 title: IG-03 Configuración NUGET
 description: Instructivo gestión de la configuración de NuGets
 published: true
-date: 2023-04-12T17:41:24.998Z
+date: 2023-04-12T18:07:22.773Z
 tags: nuget, gestion de la configuracion, instructivos, ig-03, dependencias, librerias, paquetes
 editor: markdown
 dateCreated: 2023-04-04T19:44:54.567Z
@@ -558,7 +558,31 @@ dotnet pack MyProject.csproj --configuration Release
 
 Las transformaciones de archivos de configuración permiten modificar archivos ya existentes en un proyecto de destino, como el web.config y app.config. Por ejemplo, supongamos que el paquete necesita agregar un elemento a la sección de módulos dentro del archivo de configuración. Esta transformación se logra mediante la inclusión de archivos especiales dentro del paquete que describen las secciones que deben agregarse a los archivos de configuración. Además, cuando se desinstala el paquete, estos cambios se reversen automáticamente, lo que convierte a la transformación en un proceso bidireccional.
 
-Por ejemplo, quiere modificar el web config para agregar un atributo 
+Por ejemplo, quiere modificar el web config para agregar el siguiente un atributo en el web.config al instalar el paquete Nuget.
+`<add tagPrefix="eCharts" namespace="Actsis.ECharts.Webforms.Charts"  assembly="Actsis.ECharts.Webforms" />`
+
+1. Se debe crear el XDT con la transformación `Actsis.ECharts.Webforms.install.xdt`.
+```xml
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <system.web>
+    <pages>
+      <controls>        
+        <add tagPrefix="eCharts" namespace="Actsis.ECharts.Webforms.Charts" assembly="Actsis.ECharts.Webforms" xdt:Transform="Insert" />
+      </controls>
+    </pages>
+  </system.web>
+</configuration>
+```
+
+2. Agregar el `Actsis.ECharts.Webforms.install.xdt` al proyecto `.csproj`.
+```xml
+<ItemGroup>
+	<None Include="Actsis.ECharts.Webforms.install.xdt" />
+	<Content Include="Actsis.ECharts.Webforms.install.xdt" />
+</ItemGroup>
+```
+
+Entonces cuando instale el paquete, al compilar se realizará la transformación `Actsis.ECharts.Webforms.install.xdt`.
 
 ## 6.6.	Almacenar/Listar paquetes NUGET.
 
