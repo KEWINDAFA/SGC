@@ -1,8 +1,8 @@
 ---
 title: IG-04 Configuración DotNet
 description: Instructivo de configuración DotNet en General
-published: true
-date: 2023-04-05T19:44:54.622Z
+published: false
+date: 2023-04-12T19:04:49.208Z
 tags: nuget, dotnet
 editor: markdown
 dateCreated: 2023-04-04T22:18:22.565Z
@@ -22,14 +22,7 @@ Este instructivo es aplicable a las dependencias generadas para los proyectos de
 	-	en construcción
 2. Compilar proyectos
 	-	en construcción
-3. NuGets
-  - Identificar las dependencias.
-  - Generar paquetes para las dependencias.
-  - Versionar los paquetes para las dependencias.
-  - Controlar el cambio de los paquetes.
-  - Almacenar los paquetes en el repositorio.
-  - Servir los paquetes en los IDE de desarrollo (Visual Studio).
-  4. Publicación de proyectos
+4. Publicación de proyectos
 
 ## 3.	POLITICAS
 
