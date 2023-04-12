@@ -2,7 +2,7 @@
 title: IG-03 Configuración NUGET
 description: Instructivo gestión de la configuración de NuGets
 published: true
-date: 2023-04-05T16:37:18.862Z
+date: 2023-04-12T16:26:51.107Z
 tags: nuget, gestion de la configuracion, instructivos, ig-03, dependencias, librerias, paquetes
 editor: markdown
 dateCreated: 2023-04-04T19:44:54.567Z
@@ -12,7 +12,7 @@ dateCreated: 2023-04-04T19:44:54.567Z
 
 ## 1. OBJETIVOS
 
-Este instructivo tiene como propósito establecer la metodología para gestionar la configuración de los paquetes que son identificados como dependencias en un sistema de información .NET mediante la tecnología NUGET.
+Este instructivo tiene como propósito establecer la metodología para gestionar la configuración de los paquetes que son identificados como dependencias en un sistema de información .NET mediante la tecnología NUGET y DotNet.
 
 ## 2. ALCANCE
 
@@ -24,6 +24,7 @@ Este instructivo es aplicable a las dependencias generadas para los proyectos de
 - Controlar el cambio de los paquetes.
 - Almacenar los paquetes en el repositorio.
 - Servir los paquetes en los IDE de desarrollo (Visual Studio).
+- Uso de buenas prácticas con metadatos en `.csproj`/`.nuspec`.
 
 ## 3.	POLITICAS
 
@@ -32,10 +33,11 @@ Todos los productos de trabajo deben ser puestos bajo control del Sistema de Ges
 ## 4.	CONDICIONES GENERALES
 
 - Se considera objeto de configuración para desarrollos WEB *(códigos fuentes de las páginas web, librerías javas, archivos .jar, librerías dll, librerías C#.)*{.caption} 
-- Los desarrollos en ambiente web .NET se trabajan por proyectos los cuales son realizados en la herramienta VISUAL STUDIO.
+- Los desarrollos en ambiente web .NET se trabajan por proyectos los cuales son realizados en la herramienta VISUAL STUDIO, instale la 2017 Community Edition gratuitamente desde [visualstudio.com](https://visualstudio.microsoft.com/es/). 
 - La gestión de configuración para proyectos WEB se realiza a través de SVN Subversión.
 - Todo cambio que afecte o no la funcionalidad de un programa que se encuentre en producción debe generar una nueva versión. Cada vez que se genere un nuevo objeto de los sistemas, se debe definir su nombre según lo indicado en los instructivos ID-05 *`Construcción Software`*.
 - Los backups de los objetos de configuración se realizan siguiendo el instructivo IA-04 `*Realización Backups`*.
+- CLI de NuGet. Descargue la versión más reciente de nuget.exe desde nuget.org/downloads y guárdela en la ubicación que prefiera (se descarga directamente el .exe). Después, agregue esa ubicación a la variable de entorno PATH si aún no está.
 
 ## 5.	DOCUMENTOS REFERENCIADOS  
 
@@ -80,7 +82,7 @@ El proyecto **GENNET**, es identificado como dependencia base para cualquier pro
 
 ### Otros <i class="mdi mdi-set-none"></i>
   
-mdi mdi-set-none
+Cualquier otro proyecto, modulo o parte de un proyecto, que defina el documento de arquitectura de un sistema, para ser compartido entre otros proyectos.
 
 ## 6.3. Tipos de paquetes NUGET.
 
@@ -100,15 +102,54 @@ Corresponden a los paquetes que gestionan cualquier tipo de archivo para ser ubi
 
 Para la generación del paquete NUGET se debe tener en cuenta las siguientes instrucciones.
 
-### 6.4.1.	Identificador del paquete NUGET.
+### 6.4.1. Convenciones de nombrado
 
 Cada paquete debe tener un identificador único en el lugar que se encuentre ubicado, el identificador no distingue entre mayúsculas y minúsculas. Los identificadores no pueden contener espacios ni caracteres no válidos para una dirección URL, por lo anterior, el identificador debe representar el proyecto del cual es generado cumpliendo los lineamientos anteriores.
 
 Para el caso de los proyectos CORE, los cuales normalmente son identificados con la nomenclatura CORE_NOMBRE, el paquete NUGET seria identificado de igual manera pero sin el guion de piso.
 
-Ejemplo:
+#### Estilos de nombrado
 
-> CoreSan, CoreSac, CoreGen, GENNET. 
+Dentro del ámbito de la programación, se emplean diversos estilos para sustituir los `espacios ( )` en la definición de elementos, incluyendo nombres de variables, funciones, clases, y en la codificación de URLs, entre otros ejemplos, en el caso de la creación de paquetes NuGets en ACTSIS se utiliza los siguiente:
+
+#### convenciones_nombrado {.tabset}
+
+##### PascalCase
+
+También llamado `StudlyCase`. Es muy similar al `camelCase`, solo que en este caso **la primera letra va en mayúscula**. El nombre proviene del lenguaje de programación. Ejemplos:
+
+Ejemplos:
+
+> **EstoEstaBien**
+{.is-success}
+
+> estoYaNo
+{.is-danger}
+
+> esto_menos
+{.is-danger}
+
+##### FlatCase o dot notation
+
+En este estilo, se reemplazan los *espacios* `por puntos (.)`, todo el texto se escribe en minúsculas y las palabras se separan por medio de un punto. Cabe destacar que flat case es conocido por tener como excepción que las iniciales de cada palabra se escriben en mayúscula.
+
+Ejemplos:
+
+> **Actsis.Esta.Bien**
+{.is-success}
+
+> actsis.Log
+{.is-danger}
+
+> esto.menos
+{.is-danger}
+
+#### Prefijos
+
+Para mantener el identificador único y evitar problemas de compatibilidad al restaurar o instalar paquetes NuGets, se sugiere agregar `Actsis` como prefijo.
+
+#### Ejemplos de uso
+> CoreSan, CoreSac, CoreGen, Actsis.Echarts.Webforms
 
 ### 6.4.2.	Versión del paquete NUGET.
 
@@ -197,7 +238,109 @@ Para esta generación tener en cuenta las recomendaciones para usar una u otra f
 
 - **Script automatizado:** En las tareas de integración continua, los proyectos que son identificados como dependencias de otros, tienen una sección final como tarea y es la generación y publicación del paquete NUGET, la cual está documentada en el archivo de automatización y en el repositorio https://svn.actsis.com/svn/NUGET/Templates. Al ser automática como parte del proceso de integración, no se requiere de personal para la creación del paquete, si la creación automática falla, la creación del paquete se realiza de alguna de las dos formas anteriores.
 
-## 6.5.	Almacenar/Listar paquetes NUGET.
+## 6.5.	Configuración de metadatos
+
+Este punto se centrará en procedimientos recomendados especificos del paquete, como metadados y el empaquetado, para así crear bibliotecas de alta calidad.
+
+### 6.5.1. Creación del archivo .nuspec
+
+La creación de un manifiesto completo normalmente comienza con un archivo `.nuspec` básico generado a travez de un comando del CLI nuget.exe.
+
+```cli
+nuget spec
+```
+
+> Los archivos `.nuspec` generados contienen marcadores de posición que se deben modificar antes de crear el paquete con el comando `nuget pack`. Si `.nuspec` contiene marcadores de posición, se produce un error en el comando.
+{.is-info}
+
+El `.nuspec` generado será muy básico, ya que carece de metadatos como lenguaje, icon, License, readme, etc. Usar la siguiente plantilla para configurar todos los metadatos recomendados.
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+	<metadata>
+    <!-- Nombre o el identificador del paquete. -->
+		<id>Actsis.ECharts.Webforms</id>
+    
+    <!-- Versión del paquete NuGet. -->
+		<version>8.0.$rev$</version>
+    
+    <!-- Título descriptivo del paquete que se puede usar en algunas pantallas de interfaz de usuario.  -->
+		<title>Librería de controles ECharts</title>
+    
+    <!-- Lista separada por comas de los autores del paquete, que a menudo usan el "nombre descriptivo" de la persona o de la organización. -->
+		<authors>GENERAL</authors>
+    
+    <!-- Lista separada por comas de los creadores de paquetes que usan nombres de perfil. -->
+		<owners>$owner$</owners>
+    
+    <!-- Descripción breve del paquete para su visualización en la interfaz de usuario. -->
+		<description>Controles personalizados para gráficas Apache ECharts en Webforms.</description>
+    
+    <!-- Descripción de los cambios efectuados en esta versión del paquete. -->
+		<releaseNotes>$changes$</releaseNotes>
+    
+    <!-- Valor booleano que especifica si el cliente debe pedir al consumidor que acepte la licencia del paquete antes de instalarlo. -->
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+    
+    <!-- Metadatos del repositorio, que constan de cuatro atributos opcionales: type, url y branchcommit. -->
+		<repository type="svn" url="$repositoryUrl$" branch="$repositoryBranch$" commit="$repositoryCommit$"/>
+    
+    <!-- Una dirección URL de la página principal del paquete. -->
+		<projectUrl>$projectUrl$</projectUrl>
+    
+    <!-- Lista de etiquetas y palabras clave, delimitadas por espacios, que describen el paquete y ayudan a detectar los paquetes a través de búsquedas y filtrados. -->
+		<tags>General ACTSIS</tags>
+    
+    <!-- Información de copyright del paquete. -->
+		<copyright>Copyright 2023</copyright>
+    
+    <!-- Es una ruta de acceso a un archivo de imagen dentro del paquete. -->
+		<icon>icon.png</icon>
+    
+    <!-- text -->
+		<readme>README.md</readme>
+    <!-- text -->
+		<language>es-CO</language>
+    <!-- text -->
+		<license type="file">LICENSE</license>
+	</metadata>
+	<files>
+    <!-- text -->
+		<file src="icon.png" target="" />
+		<file src="README.md" target="" />
+		<file src="LICE*" target="" />
+	</files>
+</package>
+
+```
+
+### files {.tabset}
+
+#### icon <i class="mdi mdi-package-variant"></i>
+
+*Compatible con **NuGet 5.3.0** y versiones posteriores*
+
+Es una ruta de acceso a un archivo de imagen dentro del paquete, que a menudo se muestra en interfaces de usuario como Nuget Gallery como el icono del paquete. El tamaño del archivo de imagen está limitado a 1 MB. Los formatos de archivo admitidos incluyen **JPEG** y **PNG**. Se recomienda una resolución de imagen de **128 x 128**.
+
+Por ejemplo, agregaría lo siguiente a nuspec al crear un paquete mediante nuget.exe:
+
+```xml
+<package>
+  <metadata>
+    ...
+    <icon>images\icon.png</icon>
+    ...
+  </metadata>
+  <files>
+    ...
+    <file src="..\icon.png" target="images\" />
+    ...
+  </files>
+</package>
+```
+
+## 6.6.	Almacenar/Listar paquetes NUGET.
 
 Posterior a la creación de un paquete NUGET, se debe publicar el paquete en el servidor de paquetes NUGET, de esta manera queda disponible para su uso. La publicación del paquete en el servidor se puede realizar de tres maneras diferentes de igual manera que la generación de paquetes:
 
@@ -231,7 +374,7 @@ Teniendo en cuenta que para ejecutar el comando indicado debe estar ubicado en e
 
 - **Script automatizado:** En las tareas de integración continua, los proyectos que son identificados como dependencias de otros, tienen una sección final como tarea y es la generación y publicación del paquete NUGET, la cual está documentada en el archivo de automatización y en el repositorio https://svn.actsis.com/svn/NUGET/Templates.
 
-## 6.6.	Instalar paquetes NUGET.
+## 6.7.	Instalar paquetes NUGET.
 
 La tarea operativa de instalar un paquete NUGET está sujeta a que previamente se encuentre identificado en el proyecto correspondiente el uso de la dependencia. Por defecto, los proyectos CORE de un sistema específico tienen dependencia de la librería CoreGen, y estas a su vez de la librería 3rosCore, los proyectos web y los servicios web que requieren el uso de la capa CORE de un sistema, tienen dependencia de la librería CORE del sistema.
 
@@ -245,7 +388,7 @@ PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8v
 
 Para la instalación de un paquete NUGET en un proyecto .NET, se requiere configurar en el IDE el origen de fuentes de los paquetes según las instrucciones indicadas en el repositorio https://svn.actsis.com/svn/NUGET/Instrucciones, en este mismo repositorio, se encuentran las instrucciones operativas para la instalación de un paquete nuget.
 
-## 6.7.	Actualizar paquetes NUGET.
+## 6.8.	Actualizar paquetes NUGET.
 
 a tarea operativa de actualizar los paquetes NUGET de GENERAL existentes en un proyecto, está sujeta a que previamente se encuentre identificado en el análisis del requerimiento en desarrollo, la necesidad de actualizar el paquete o exista un requerimiento específico para la actualización.
 
@@ -259,19 +402,19 @@ Para los proyectos WEB .NET, la actualización de los paquetes NUGET se presenta
 
 Para la actualización de un paquete NUGET en un proyecto .NET, se requiere configurar en el IDE el origen de fuentes de los paquetes según las instrucciones indicadas en el repositorio https://svn.actsis.com/svn/NUGET/Instrucciones, en este mismo repositorio, se encuentran las instrucciones operativas para la actualización de un paquete nuget.
 
-## 6.8.	Restaurar paquetes NUGET.
+## 6.9.	Restaurar paquetes NUGET.
 
 La tarea de restauración de paquetes NUGET se requerida cuando se descarga un proyecto .NET de su correspondiente repositorio y se requiere compilar o publicar el proyecto, la restauración descarga las dependencias requeridas, ya que el proyecto no es versionado en el repositorio con las dependencias.
 
 Para la restauración de un paquete NUGET en un proyecto .NET, se requiere configurar en el IDE el origen de fuentes de los paquetes según las instrucciones indicadas en el repositorio https://svn.actsis.com/svn/NUGET/Instrucciones/OrigenPaquetes, en el repositorio https://svn.actsis.com/svn/NUGET/Instrucciones/Restaurar se encuentran las instrucciones operativas para la restauración de paquete nuget.
 
-## 6.9.	Desinstalar paquetes NUGET.
+## 6.10.	Desinstalar paquetes NUGET.
 
 La tarea operativa de desinstalar un paquete NUGET existente en un proyecto, está sujeta a que previamente se encuentre identificado en el análisis del requerimiento en desarrollo, la necesidad de eliminar el paquete teniendo en cuenta que no se requiere el uso de las librerías que sirve el paquete.
 
 Para la desinstalación de un paquete NUGET en un proyecto .NET, se requiere configurar en el IDE el origen de fuentes de los paquetes según las instrucciones indicadas en el repositorio https://svn.actsis.com/svn/NUGET/Instrucciones, en este mismo repositorio, se encuentran las instrucciones operativas para la desinstalación de un paquete nuget.
 
-## 6.10.	Eliminar paquetes NUGET.
+## 6.11.	Eliminar paquetes NUGET.
 
 Como parte del mantenimiento del servidor de paquetes nuget, se definen las siguientes condiciones para la eliminación de paquetes nuget del servidor:
 
