@@ -2,7 +2,7 @@
 title: IG-03 Configuración NUGET
 description: Instructivo gestión de la configuración de NuGets
 published: true
-date: 2023-04-12T16:26:51.107Z
+date: 2023-04-12T17:41:24.998Z
 tags: nuget, gestion de la configuracion, instructivos, ig-03, dependencias, librerias, paquetes
 editor: markdown
 dateCreated: 2023-04-04T19:44:54.567Z
@@ -298,11 +298,13 @@ El `.nuspec` generado será muy básico, ya que carece de metadatos como lenguaj
     <!-- Es una ruta de acceso a un archivo de imagen dentro del paquete. -->
 		<icon>icon.png</icon>
     
-    <!-- text -->
+    <!-- Es una ruta de acceso a un archivo del readme dentro del paquete. -->
 		<readme>README.md</readme>
-    <!-- text -->
+    
+    <!-- Identificador de configuración regional del paquete. -->
 		<language>es-CO</language>
-    <!-- text -->
+    
+    <!-- Es una ruta de acceso a un archivo del licencia dentro del paquete. -->
 		<license type="file">LICENSE</license>
 	</metadata>
 	<files>
@@ -339,6 +341,224 @@ Por ejemplo, agregaría lo siguiente a nuspec al crear un paquete mediante nuget
   </files>
 </package>
 ```
+
+#### README <i class="mdi mdi-read"></i>
+
+*Compatible con la versión **preliminar 2 y posteriores de NuGet 5.10.0***
+
+Al empaquetar un archivo Léame, debe usar el `readme` elemento para especificar la ruta de acceso del paquete, en relación con la raíz del paquete. Además de esto, debe asegurarse de que el archivo se incluye en el paquete. Los formatos de archivo admitidos incluyen solo Markdown (.md).
+
+Por ejemplo, agregaría lo siguiente a nuspec al crear un paquete mediante nuget.exe:
+
+```xml
+<package>
+  <metadata>
+    ...
+    <icon>images\icon.png</icon>
+    ...
+  </metadata>
+  <files>
+    ...
+    <file src="..\icon.png" target="images\" />
+    ...
+  </files>
+</package>
+```
+
+#### LICENSE <i class="mdi mdi-license"></i>
+
+*Compatible con **NuGet 4.9.0 y versiones posteriores***
+
+Expresión de licencia SPDX o ruta de acceso a un archivo de licencia dentro del paquete, que a menudo se muestra en interfaces de usuario como Nuget Gallery. Si va a conceder licencias al paquete bajo una licencia común, como MIT o BSD-2-Clause, use el [identificador de licencia SPDX](https://spdx.org/licenses/) asociado. 
+Por ejemplo:
+
+`<license type="expression">MIT</license>`
+
+Si usa una licencia personalizada que no es compatible con expresiones de licencia, puede empaquetar un `.txt` archivo o `.md` con el texto de la licencia. Por ejemplo:
+
+```xml
+<package>
+  <metadata>
+    ...
+    <license type="file">LICENSE.txt</license>
+    ...
+  </metadata>
+  <files>
+    ...
+    <file src="licenses\LICENSE.txt" target="" />
+    ...
+  </files>
+</package>
+```
+
+en caso de no usar una extensión solo debe cambiar el file por el siguiente ejemplo:
+
+`<file src="LICE*" target="" />`
+
+### Estructura de carpeta
+
+Para usar correctamente la plantilla de los metadatos, ubicar los archivos icon, readme y license en la misma carpeta del proyecto.
+
+```diagram
+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIxODFweCIgaGVpZ2h0PSI0ODJweCIgdmlld0JveD0iLTAuNSAtMC41IDE4MSA0ODIiIGNvbnRlbnQ9IiZsdDtteGZpbGUgaG9zdD0mcXVvdDtlbWJlZC5kaWFncmFtcy5uZXQmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wNC0xMlQxNzowNjoxMS4yMjNaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChXaW5kb3dzIE5UIDEwLjA7IFdpbjY0OyB4NjQ7IHJ2OjEwOS4wKSBHZWNrby8yMDEwMDEwMSBGaXJlZm94LzExMS4wJnF1b3Q7IHZlcnNpb249JnF1b3Q7MjEuMS43JnF1b3Q7IGV0YWc9JnF1b3Q7U1pxYzdKc1g5OW5SREFyamJuUWYmcXVvdDsgdHlwZT0mcXVvdDtlbWJlZCZxdW90OyZndDsmbHQ7ZGlhZ3JhbSBpZD0mcXVvdDtkYlZFdnQ5dWFJQlR2ZzlLZEhWbiZxdW90OyBuYW1lPSZxdW90O1DDoWdpbmEtMSZxdW90OyZndDs3Vm5MY3Bzd0ZQMGFsdlVnd0dBdi9hQnBaNXBNcGw1MFRaQU1hZ0ZSSVdLN1gxOEJFaUNqUEJhS1o1SjR2TEE0a3E2a2M4KzVqR3pMM2VUSEd4cVY2UzJCS0xNY0d4NHRkMnM1RHZEc0JmOXFrRk9IQkFIb2dJUmlLQVlOd0E3L1F3SzBCVnBqaUNwbElDTWtZN2hVd1pnVUJZcVpna1dVa29NNmJFOHlkZFV5U3RBRTJNVlJOa1YvWWNqU0RsMDR3WUIvUXpoSjVjckFYM1k5ZVNRSGk1TlVhUVRKWVFTNW9lVnVLQ0dzYStYSERjb2E4aVF2M2J5dlQvVDJHNk9vWUsrWjRIWVRIcU9zRm1jVCsySW5lVmhLNmdLaVpyeHR1ZXREaWhuYWxWSGM5QjU0ZWptV3NqempUNEEzOXpqTE5pUWp0SjNySXEvNWNGd3NneWhEeHllM0Nub0N1SElReVJHakp6NUVUbGlJelFyUmdLWGc4RENrd08rUWRFUytaNHRoa1VoNjBrY2VlT0VOUVkyZUprOURrNSt4NXV4ODAzN0MyaU4yeUo3dzg0d1o5UC9XUkhaOHFWb3hyL2dBc0NpUDNUVFJMd1BkVTNMaXFpVXlJTjljRjFOZGg4UGp4Yyt5eG5sbWFtcWlEQ2NGYjhlY2I4VHpzMjZ5Z2Jtb1Y2SWp4eEEyMDljVThWMUdEMjJvSnVjbHdRVnIyWnV2cmZtMmlWVXowcDJrRFYweFN2NGdtZmVDRk9oTUNnSXlvZ0piVlFHWXFnRElsSTkxRUJpUXdYd2lneTJKSzZPT0NiM21ZNFlyeHozalN1TVk0R3E0OGd4d0ZieGNXVkFCVjAwMUhnUXk0a1Vsc1ZPWUxMWk96dytDazByOUlqdWowODgxaDVjWVJWbkU4S01hWHNlSVdPRytjY2xJcUV1Vi9QN2xKVU5VcEtZeEVyUEdKZm9zMEhrV0o0RllSQlBFSm9IYUJQWEhmbFhPRmsrV09ZZ2ZaYW01Q2U5R0pXalU4VzU4MEtmNEVqNVlYbjJna3U4dlo0RnZ5QXFhV09iY0lIMzJ2QjFLU243enQvVXNycHJXTzNlR3EzdWJ2cFV6QUxoYVEyWGZNV2NOWFN5RDFuQ3VxVlBwWGhoTW5TYVd3ZFJOcjN5eWhCVjFWYUw0L1JTcjRKTEZTbmNGL015Szl6eHppdGZGTXFqNDZiVU54NlNZbFVWaVZPc1BBTUw5a054UkQ3QURkMm5vQWp6aHpyMmtDL3lyQ3hUMjU3WTVGK2hpR1hUQjlFTCtNMXh0YjhOWkRqK0NEUzc1MndiUVhaUS90UTBNWHVwMHNRemFZSG9mLy9GOUU5N3R3ZzlnZ3ZrYi9yREJINGUvSlRyaWh6OTMzUEEvJmx0Oy9kaWFncmFtJmd0OyZsdDsvbXhmaWxlJmd0OyI+PGRlZnMvPjxnPjxyZWN0IHg9IjMiIHk9IjgwIiB3aWR0aD0iNiIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNlNGU0ZTQiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSI3MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7IiBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDFweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiAzNXB4OyBtYXJnaW4tbGVmdDogNTBweDsiPjxkaXYgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7IiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNlOiBub3dyYXA7Ij48aDE+PGZvbnQgc3R5bGU9ImZvbnQtc2l6ZTogMThweDsiPlByb3llY3RvPC9mb250PjwvaDE+PC9kaXY+PC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjUwIiB5PSIzOSIgZmlsbD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlByb3llY3RvPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSI1MCIgeT0iODAiIHdpZHRoPSIxMzAiIGhlaWdodD0iNDAiIGZpbGw9IiNlNGU0ZTQiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7IiBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDEyOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDEwMHB4OyBtYXJnaW4tbGVmdDogNTFweDsiPjxkaXYgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7IiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkRvY3M8L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMTE1IiB5PSIxMDQiIGZpbGw9InJnYigwLCAwLCAwKSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5Eb2NzPC90ZXh0Pjwvc3dpdGNoPjwvZz48cGF0aCBkPSJNIDEwIDEwMCBMIDUwIDEwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHJlY3QgeD0iNTAiIHk9IjE0MCIgd2lkdGg9IjEzMCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2U0ZTRlNCIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsiIHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogMTI4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMTYwcHg7IG1hcmdpbi1sZWZ0OiA1MXB4OyI+PGRpdiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsiIGRhdGEtZHJhd2lvLWNvbG9ycz0iY29sb3I6IHJnYigwLCAwLCAwKTsgIj48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+PGRpdj5HRU48L2Rpdj48L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMTE1IiB5PSIxNjQiIGZpbGw9InJnYigwLCAwLCAwKSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5HRU48L3RleHQ+PC9zd2l0Y2g+PC9nPjxwYXRoIGQ9Ik0gMTAgMTU5Ljc2IEwgNTAgMTU5Ljc2IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cmVjdCB4PSI1MCIgeT0iMjAwIiB3aWR0aD0iMTMwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjZTRlNGU0IiBzdHJva2U9InJnYigwLCAwLCAwKSIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjUgLTAuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3Qgc3R5bGU9Im92ZXJmbG93OiB2aXNpYmxlOyB0ZXh0LWFsaWduOiBsZWZ0OyIgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVyOyBqdXN0aWZ5LWNvbnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiAxMjhweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiAyMjBweDsgbWFyZ2luLWxlZnQ6IDUxcHg7Ij48ZGl2IHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyIgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3aGl0ZS1zcGFjZTogbm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij48ZGl2PnByb2plY3QuY3Nwcm9qPC9kaXY+PC9kaXY+PC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjExNSIgeT0iMjI0IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+cHJvamVjdC5jc3Byb2o8L3RleHQ+PC9zd2l0Y2g+PC9nPjxwYXRoIGQ9Ik0gMTAgMjE5Ljc2IEwgNTAgMjE5Ljc2IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBkPSJNIDEwIDI3OS43NiBMIDUwIDI3OS43NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHJlY3QgeD0iNTAiIHk9IjI2MCIgd2lkdGg9IjEzMCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2U0ZTRlNCIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsiIHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogMTI4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjgwcHg7IG1hcmdpbi1sZWZ0OiA1MXB4OyI+PGRpdiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsiIGRhdGEtZHJhd2lvLWNvbG9ycz0iY29sb3I6IHJnYigwLCAwLCAwKTsgIj48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+cHJvamVjdC5udXNwZWM8L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMTE1IiB5PSIyODQiIGZpbGw9InJnYigwLCAwLCAwKSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5wcm9qZWN0Lm51c3BlYzwvdGV4dD48L3N3aXRjaD48L2c+PHBhdGggZD0iTSAxMCAzMzkuNzYgTCA1MCAzMzkuNzYiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxyZWN0IHg9IjUwIiB5PSIzMjAiIHdpZHRoPSIxMzAiIGhlaWdodD0iNDAiIGZpbGw9IiNiMWRkZjAiIHN0cm9rZT0iIzEwNzM5ZSIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjUgLTAuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3Qgc3R5bGU9Im92ZXJmbG93OiB2aXNpYmxlOyB0ZXh0LWFsaWduOiBsZWZ0OyIgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVyOyBqdXN0aWZ5LWNvbnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiAxMjhweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiAzNDBweDsgbWFyZ2luLWxlZnQ6IDUxcHg7Ij48ZGl2IHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyIgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3aGl0ZS1zcGFjZTogbm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5pY29uLnBuZzwvZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIxMTUiIHk9IjM0NCIgZmlsbD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPmljb24ucG5nPC90ZXh0Pjwvc3dpdGNoPjwvZz48cGF0aCBkPSJNIDEwIDM5OS43NiBMIDUwIDM5OS43NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHJlY3QgeD0iNTAiIHk9IjM4MCIgd2lkdGg9IjEzMCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2IxZGRmMCIgc3Ryb2tlPSIjMTA3MzllIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7IiBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDEyOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDQwMHB4OyBtYXJnaW4tbGVmdDogNTFweDsiPjxkaXYgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7IiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPlJFQURNRS5tZDwvZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIxMTUiIHk9IjQwNCIgZmlsbD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlJFQURNRS5tZDwvdGV4dD48L3N3aXRjaD48L2c+PHBhdGggZD0iTSAxMCA0NTkuNzYgTCA1MCA0NTkuNzYiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxyZWN0IHg9IjUwIiB5PSI0NDAiIHdpZHRoPSIxMzAiIGhlaWdodD0iNDAiIGZpbGw9IiNiMWRkZjAiIHN0cm9rZT0iIzEwNzM5ZSIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjUgLTAuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3Qgc3R5bGU9Im92ZXJmbG93OiB2aXNpYmxlOyB0ZXh0LWFsaWduOiBsZWZ0OyIgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVyOyBqdXN0aWZ5LWNvbnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiAxMjhweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiA0NjBweDsgbWFyZ2luLWxlZnQ6IDUxcHg7Ij48ZGl2IHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyIgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3aGl0ZS1zcGFjZTogbm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5MSUNFTlNFPC9kaXY+PC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjExNSIgeT0iNDY0IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TElDRU5TRTwvdGV4dD48L3N3aXRjaD48L2c+PC9nPjxzd2l0Y2g+PGcgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ii8+PGEgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwtNSkiIHhsaW5rOmhyZWY9Imh0dHBzOi8vd3d3LmRpYWdyYW1zLm5ldC9kb2MvZmFxL3N2Zy1leHBvcnQtdGV4dC1wcm9ibGVtcyIgdGFyZ2V0PSJfYmxhbmsiPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTBweCIgeD0iNTAlIiB5PSIxMDAlIj5UZXh0IGlzIG5vdCBTVkcgLSBjYW5ub3QgZGlzcGxheTwvdGV4dD48L2E+PC9zd2l0Y2g+PC9zdmc+
+```
+
+
+### Descargar plantilla `.nuspec`
+
+- [Descargar plantilla `.nuspec` *nombreproyecto.nuspec*](/recursos/gestion/formatos/nombreproyecto.nuspec)
+{.links-list}
+
+### 6.5.2. Creación de metadata usando DotNet
+
+Otra forma de empaquetar los proyectos es usando el CLI Dotnet, esta herramienta es la mas reciente y más utilizada en las ultimas versiones de proyectos .NET, no es necesario el uso de los archivos `.nuspec` ya que toda la configuración puede ir en el proyecto `.csproj`, a diferencia del .nuspec, algunos nombres de los metadatos cambian ligeramente, por lo que no se puede usar la misma configuración.
+
+Ejemplo de los metadatos `.csproj`
+
+```xml
+  <PropertyGroup>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <id>Actsis.ECharts.Standard</id>
+    <VersionSuffix Condition="'$(VersionSuffix)' != ''">$(VersionSuffix)</VersionSuffix>
+    <VersionSuffix Condition="'$(VersionSuffix)' == ''"></VersionSuffix>
+    <Version Condition="'$(RevNumber)' != ''">8.0.$(RevNumber)-$(VersionSuffix)</Version>
+    <Version Condition="'$(RevNumber)' == ''">8.0.0-$(VersionSuffix)</Version>
+    <Version Condition="'$(VersionSuffix)' == ''">8.0.$(RevNumber)</Version>
+    <Version Condition="'$(RevNumber)' == ''">8.0.0</Version>
+
+    <Authors Condition="'$(AuthorsName)' != ''">$(AuthorsName)</Authors>
+    <Authors Condition="'$(AuthorsName)' == ''">GENERAL</Authors>
+
+    <Company Condition="'$(CompanyName)' != ''">$(CompanyName)</Company>
+    <Company Condition="'$(CompanyName)' == ''">ACTSIS Ltda</Company>
+
+    <Product Condition="'$(ProductName)' != ''">$(ProductName)</Product>
+    <Product Condition="'$(ProductName)' == ''">Actsis.ECharts.Standard</Product>
+
+    <Title Condition="'$(ProjectTitle)' != ''">$(ProjectTitle)</Title>
+    <Title Condition="'$(ProjectTitle)' == ''">Actsis.ECharts.Standard</Title>
+
+    <PackageOwnership Condition="'$(Ownership)' != ''">$(Ownership)</PackageOwnership>
+    <PackageOwnership Condition="'$(Ownership)' == ''">ACTSIS</PackageOwnership>
+
+    <PackageProjectUrl Condition="'$(ProjectUrl)' != ''">$(ProjectUrl)</PackageProjectUrl>
+    <PackageReleaseNotes Condition="'$(ReleaseNotesContent)' != ''">$(ReleaseNotesContent)</PackageReleaseNotes>
+    <RepositoryUrl Condition="'$(RepositoryUrl)' != ''">$(RepositoryUrl)</RepositoryUrl>
+    <RepositoryType>svn</RepositoryType>
+    <RepositoryBranch Condition="'$(RepositoryBranch)' != ''">$(RepositoryBranch)</RepositoryBranch>
+    <RepositoryCommit Condition="'$(RepositoryCommit)' != ''">$(RepositoryCommit)</RepositoryCommit>
+
+    <PackageTags>General ACTSIS</PackageTags>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Description>Librería .Net Standar para manejo de graficas Apache ECharts.</Description>
+    <Copyright>Copyright 2023</Copyright>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="icon.png" Pack="true" PackagePath="\" />
+    <None Include="LICENSE" Pack="true" Visible="false" PackagePath="" />
+  </ItemGroup>
+```
+
+### files {.tabset}
+
+#### PackageIcon <i class="mdi mdi-package-variant"></i>
+
+Al empaquetar un archivo de imagen de icono, use PackageIcon la propiedad para especificar la ruta de acceso del archivo de icono, en relación con la raíz del paquete. Además, asegúrese de que el archivo está incluido en el paquete. El tamaño del archivo de imagen está limitado a **1 MB**. Los formatos de archivo admitidos incluyen **JPEG** y **PNG**. Se recomienda una resolución de imagen de **128 x 128**.
+
+Por ejemplo, agregaría lo siguiente a nuspec al crear un paquete mediante nuget.exe:
+
+```xml
+<PropertyGroup>
+    ...
+    <PackageIcon>icon.png</PackageIcon>
+    ...
+</PropertyGroup>
+
+<ItemGroup>
+    ...
+    <None Include="images\icon.png" Pack="true" PackagePath="\"/>
+    ...
+</ItemGroup>
+```
+
+#### PackageReadmeFile <i class="mdi mdi-read"></i>
+
+Al empaquetar un archivo Léame, debe usar la propiedad para especificar la `PackageReadmeFile` ruta de acceso del paquete, en relación con la raíz del paquete. Además de esto, debe asegurarse de que el archivo está incluido en el paquete. Los formatos de archivo admitidos incluyen solo Markdown (.md).
+
+Por ejemplo:
+
+```xml
+<PropertyGroup>
+    ...
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    ...
+</PropertyGroup>
+
+<ItemGroup>
+    ...
+    <None Include="docs\readme.md" Pack="true" PackagePath="\"/>
+    ...
+</ItemGroup>
+```
+
+#### PackageLicenseFile <i class="mdi mdi-license"></i>
+
+Al usar una expresión de licencia, use la PackageLicenseExpression propiedad . Para obtener un ejemplo, consulte [Ejemplo de expresión de licencia](https://github.com/NuGet/Samples/tree/main/PackageLicenseExpressionExample).
+
+```xml
+<PropertyGroup>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+</PropertyGroup>
+```
+
+En algunos escenarios, como al empaquetar un archivo de licencia, es posible que desee incluir un archivo sin una extensión. Por motivos históricos, NuGet&MSBuild trate las rutas de acceso sin una extensión como directorios.
+
+```xml
+<PropertyGroup>
+	<TargetFrameworks>netstandard2.0</TargetFrameworks>
+  <PackageLicenseFile>LICENSE</PackageLicenseFile>
+</PropertyGroup>
+
+<ItemGroup>
+	|<None Include="LICENSE" Pack="true" PackagePath=""/>
+</ItemGroup>
+```
+
+### 6.5.3. Tokens de reemplazo
+
+Como se habrá dado cuenta, en los archivos de configuración de metadatos, muchos datos están en variables, al crear un paquete, el nuget pack comando reemplaza los tokens delimitados por $-delimitados en el `.nuspec` nodo del `<metadata>` archivo por valores que proceden de un archivo de proyecto o del pack modificador del -properties comando.
+
+En la línea de comandos, especifique valores de token con `dotnet pack --configuration Release /p:Ownership="ACTSIS"` o `nuget pack -Properties Configuration=Release;owners="ACTSIS Ltda";`.
+
+Por ejemplo, puede usar un token como `$owners$` y `$desc$` en .nuspec o .csproj y proporcionar los valores en el momento del empaquetado del siguiente modo:
+
+### tokens {.tabset}
+
+#### .nuspec
+
+```ps
+nuget pack MyProject.csproj -Properties 
+		Configuration=Release;owners=janedoe,harikm,kimo,xiaop;desc="Awesome app logger utility"
+```
+
+#### .csproj
+
+```ps
+dotnet pack MyProject.csproj --configuration Release
+    /p:Ownership=janedoe,harikm,kimo,xiaop /p:Description="Awesome app logger utility"
+```
+
+### 6.5.4. Uso de XML Data Transform (XDT) para configurar automáticamente web.config durante la instalación del paquete Nuget
+
+Las transformaciones de archivos de configuración permiten modificar archivos ya existentes en un proyecto de destino, como el web.config y app.config. Por ejemplo, supongamos que el paquete necesita agregar un elemento a la sección de módulos dentro del archivo de configuración. Esta transformación se logra mediante la inclusión de archivos especiales dentro del paquete que describen las secciones que deben agregarse a los archivos de configuración. Además, cuando se desinstala el paquete, estos cambios se reversen automáticamente, lo que convierte a la transformación en un proceso bidireccional.
+
+Por ejemplo, quiere modificar el web config para agregar un atributo 
 
 ## 6.6.	Almacenar/Listar paquetes NUGET.
 
