@@ -2,7 +2,7 @@
 title: Inicio
 description: 
 published: true
-date: 2023-04-05T19:55:13.440Z
+date: 2023-04-14T14:21:54.123Z
 tags: 
 editor: markdown
 dateCreated: 2023-04-04T16:54:38.307Z
@@ -34,17 +34,17 @@ Ejemplo bloque de código:
 ---
 
 | Propiedad | Valor |
-| :--- | :--- |
+| --- | --- |
 | **Título** | GESTIÓN DE DEPENDENCIAS .NET - NUGET |
 | **Código** | IG-03 |
-| **Versión** | 01 |
+| **Versión** | 01  |
 | **Fecha** | 29/10/2020 |
 | **Elaboró** | Jorge Reyes Vargas |
 | **Aprobó** | Iván Darío Sarmiento L. |
-| **Controlado** | Si |
+| **Controlado** | Si  |
 
-### 8. Registro Histórico
+### 8\. Registro Histórico
 
 | Versión | Fecha | Cambio realizado |
-| :--- | :--- | :--- |
-| 01 | 29/10/2020 | Versión inicial del documento IG-03 según FA-05_572 |
+| --- | --- | --- |
+| 01  | 29/10/2020 | Versión inicial del documento IG-03 según FA-05\_572 |
