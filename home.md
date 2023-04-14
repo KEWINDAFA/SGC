@@ -2,7 +2,7 @@
 title: Inicio
 description: 
 published: true
-date: 2023-04-14T14:27:42.483Z
+date: 2023-04-14T14:38:29.189Z
 tags: 
 editor: markdown
 dateCreated: 2023-04-04T16:54:38.307Z
@@ -57,3 +57,5 @@ PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8v
 |columna 1 | columna 2|
 | --- | --- |
 |ejemplo 1|ejemplo 2|
+
+![172.jpg](/recursos/172.jpg)
