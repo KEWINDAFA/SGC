@@ -2,7 +2,7 @@
 title: IG-03 Configuración NUGET
 description: Instructivo gestión de la configuración de NuGets
 published: true
-date: 2023-04-24T19:42:10.791Z
+date: 2023-04-24T20:38:38.643Z
 tags: nuget, gestion de la configuracion, instructivos, ig-03, dependencias, librerias, paquetes
 editor: markdown
 dateCreated: 2023-04-04T19:44:54.567Z
@@ -240,11 +240,11 @@ Para esta generación tener en cuenta las recomendaciones para usar una u otra f
 
 ## 6.5.	Configuración de metadatos
 
-Este punto se centrará en procedimientos recomendados especificos del paquete, como metadados y el empaquetado, para así crear bibliotecas de alta calidad.
+Este punto se centrará en procedimientos recomendados específicos del paquete, como metadatos y el empaquetado, para así crear bibliotecas de alta calidad.
 
 ### 6.5.1. Creación del archivo .nuspec
 
-La creación de un manifiesto completo normalmente comienza con un archivo `.nuspec` básico generado a travez de un comando del CLI nuget.exe.
+La creación de un manifiesto completo normalmente comienza con un archivo `.nuspec` básico generado a través de un comando del CLI nuget.exe.
 
 ```cli
 nuget spec
@@ -412,7 +412,7 @@ PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8v
 
 ### 6.5.2. Creación de metadata usando DotNet
 
-Otra forma de empaquetar los proyectos es usando el CLI Dotnet, esta herramienta es la mas reciente y más utilizada en las ultimas versiones de proyectos .NET, no es necesario el uso de los archivos `.nuspec` ya que toda la configuración puede ir en el proyecto `.csproj`, a diferencia del .nuspec, algunos nombres de los metadatos cambian ligeramente, por lo que no se puede usar la misma configuración.
+Otra forma de empaquetar los proyectos es usando el CLI Dotnet, esta herramienta es la más reciente y más útilizada en las ultimas versiones de proyectos .NET, no es necesario el uso de los archivos `.nuspec` ya que toda la configuración puede ir en el proyecto `.csproj`, a diferencia del .nuspec, algunos nombres de los metadatos cambian ligeramente, por lo que no se puede usar la misma configuración.
 
 Ejemplo de los metadatos `.csproj`
 
