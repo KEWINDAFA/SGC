@@ -2,7 +2,7 @@
 title: IG-03 Configuración NUGET
 description: Instructivo gestión de la configuración de NuGets
 published: true
-date: 2023-04-12T18:08:34.957Z
+date: 2023-04-24T19:42:10.791Z
 tags: nuget, gestion de la configuracion, instructivos, ig-03, dependencias, librerias, paquetes
 editor: markdown
 dateCreated: 2023-04-04T19:44:54.567Z
@@ -110,7 +110,7 @@ Para el caso de los proyectos CORE, los cuales normalmente son identificados con
 
 #### Estilos de nombrado
 
-Dentro del ámbito de la programación, se emplean diversos estilos para sustituir los `espacios ( )` en la definición de elementos, incluyendo nombres de variables, funciones, clases, y en la codificación de URLs, entre otros ejemplos, en el caso de la creación de paquetes NuGets en ACTSIS se utiliza los siguiente:
+Dentro del ámbito de la programación, se emplean diversos estilos para sustituir los `espacios ( )` en la definición de elementos, incluyendo nombres de variables, funciones, clases, y en la codificación de URLs, entre otros ejemplos, en el caso de la creación de paquetes NuGets en ACTSIS se utiliza los siguientes:
 
 #### convenciones_nombrado {.tabset}
 
