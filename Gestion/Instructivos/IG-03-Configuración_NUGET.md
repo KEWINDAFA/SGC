@@ -2,7 +2,7 @@
 title: IG-03 Configuración NUGET
 description: Instructivo gestión de la configuración de NuGets
 published: true
-date: 2023-04-25T20:17:44.419Z
+date: 2023-05-23T22:18:58.345Z
 tags: nuget, gestion de la configuracion, instructivos, ig-03, dependencias, librerias, paquetes
 editor: markdown
 dateCreated: 2023-04-04T19:44:54.567Z
@@ -353,12 +353,12 @@ Por ejemplo, agregaría lo siguiente a nuspec al crear un paquete mediante nuget
 <package>
   <metadata>
     ...
-    <icon>images\icon.png</icon>
+    <icon>Docs\README.md</icon>
     ...
   </metadata>
   <files>
     ...
-    <file src="..\icon.png" target="images\" />
+    <file src="..\README.md" target="Docs\" />
     ...
   </files>
 </package>
@@ -379,12 +379,12 @@ Si usa una licencia personalizada que no es compatible con expresiones de licenc
 <package>
   <metadata>
     ...
-    <license type="file">LICENSE.txt</license>
+    <license type="file">LICENSE</license>
     ...
   </metadata>
   <files>
     ...
-    <file src="licenses\LICENSE.txt" target="" />
+    <file src="LICE*" target="" />
     ...
   </files>
 </package>
